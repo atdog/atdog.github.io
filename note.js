@@ -108,6 +108,9 @@ function init() {
     freqData.fill(-1);
 
     var streamReceived = function(stream) {
+        var AudioContext = window.AudioContext // Default
+            || window.webkitAudioContext // Safari and old versions of Chrome
+            || false;
         var context = new AudioContext();
 
         var analyser = context.createAnalyser();
