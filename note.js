@@ -104,7 +104,7 @@ function init() {
     waveform.width = document.body.clientWidth;
     waveform.height = document.body.clientHeight;
 
-    var freqData = new Array(waveform.width);
+    var freqData = new Array((waveform.width * 3) / 4);
     freqData.fill(-1);
 
     var streamReceived = function(stream) {
@@ -115,10 +115,10 @@ function init() {
         analyser.fftSize = 2048;
 
         var sourceAudioNode = context.createMediaStreamSource(stream);
-        //var filter = context.createBiquadFilter();
+        var filter = context.createBiquadFilter();
 
-        sourceAudioNode.connect(analyser);
-        //filter.connect(analyser);
+        sourceAudioNode.connect(filter);
+        filter.connect(analyser);
 
         var detectFreq = function() {
             window.requestAnimationFrame(detectFreq);
