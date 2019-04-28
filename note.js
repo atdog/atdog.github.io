@@ -111,8 +111,8 @@ function init() {
         var context = new AudioContext();
 
         var analyser = context.createAnalyser();
-        analyser.smoothingTimeConstant = 0.8;
-        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.4;
+        analyser.fftSize = 4096;
 
         var sourceAudioNode = context.createMediaStreamSource(stream);
         var filter = context.createBiquadFilter();
