@@ -111,7 +111,7 @@ function init() {
         var context = new AudioContext();
 
         var analyser = context.createAnalyser();
-        analyser.smoothingTimeConstant = 0.4;
+        analyser.smoothingTimeConstant = 0.8;
         analyser.fftSize = 4096;
 
         var sourceAudioNode = context.createMediaStreamSource(stream);
@@ -120,10 +120,11 @@ function init() {
         sourceAudioNode.connect(filter);
         filter.connect(analyser);
 
+        var buf = new Float32Array(analyser.fftSize/2);
+
         var detectFreq = function() {
             window.requestAnimationFrame(detectFreq);
 
-            var buf = new Float32Array(analyser.fftSize/2);
             analyser.getFloatTimeDomainData(buf);
 
             var freq = autoCorrelate(buf, context.sampleRate);
