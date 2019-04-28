@@ -115,10 +115,10 @@ function init() {
         analyser.fftSize = 2048;
 
         var sourceAudioNode = context.createMediaStreamSource(stream);
-        var filter = context.createBiquadFilter();
+        //var filter = context.createBiquadFilter();
 
-        sourceAudioNode.connect(filter);
-        filter.connect(analyser);
+        sourceAudioNode.connect(analyser);
+        //filter.connect(analyser);
 
         var detectFreq = function() {
             window.requestAnimationFrame(detectFreq);
