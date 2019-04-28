@@ -104,7 +104,7 @@ function init() {
     waveform.width = document.body.clientWidth;
     waveform.height = document.body.clientHeight;
 
-    var freqData = new Array((waveform.width * 3) / 4);
+    var freqData = new Array(512);
     freqData.fill(-1);
 
     var streamReceived = function(stream) {
@@ -133,6 +133,7 @@ function init() {
 
             var waveCanvas = waveform.getContext("2d");
             var barh = waveform.height / 13;
+            var barw = (waveform.width * 3 / 4) / 512;
 
             waveCanvas.clearRect(0, 0, waveform.width, waveform.height);
 
@@ -148,7 +149,7 @@ function init() {
 
                 currentStrings[note % 12] = noteStrings[note % 12] + octave;
 
-                var x = i;
+                var x = i * barw;
                 var y = (12 - (note % 12) - (cents / 100)) * barh;
 
                 if(isdrawing && frequency == -1) {
